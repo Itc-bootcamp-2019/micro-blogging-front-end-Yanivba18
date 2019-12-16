@@ -4,6 +4,8 @@ body {
 
 .App {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tweet-box {
@@ -11,13 +13,29 @@ body {
   border-radius: 5px;
   margin: auto;
   margin-top: 5px;
+  margin-bottom: 10px;
   width: 600px;
   height: 180px;
 }
 
-.text-end {
+.btn-div {
   text-align: end;
   padding-right: 10px;
+  flex-grow: 1;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.invalid-input {
+  margin-left: 15px;
+  font-size: 16px;
+  line-height: 32px;
+  padding: 0 10px;
+  background-color: #F5C6CB;
+  border-radius: 5px;
+  color: #721C24;
 }
 
 .tweet-box-input {
@@ -27,6 +45,7 @@ body {
   height: calc(100% - 55px);
   resize: none;
   border: 0;
+  padding-left: 15px;
 }
 
 .tweet-box-input:focus {
@@ -44,4 +63,31 @@ body {
   height: 34px;
   border: none;
   border-radius: 5px;
+}
+
+.msg-box {
+  width: 600px;
+  background-color: #343A40;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.msg-box.loading {
+  color: white;
+}
+
+.msg {
+  font-size: 14px;
+  padding: 20px;
+}
+
+.msg.header {
+  color: #6C757D;
+  display: flex;
+  justify-content: space-between;
+}
+
+.msg.body {
+  color: white;
+  padding-top: 0px;
 }
