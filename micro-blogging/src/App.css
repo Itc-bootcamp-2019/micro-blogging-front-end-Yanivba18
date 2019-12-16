@@ -1,4 +1,32 @@
+body {
+  background-color: #15202B;
+}
+
 .App {
   text-align: center;
 }
 
+.tweet-box {  
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 5px;
+  width: 600px;
+  height: 180px;
+}
+
+.tweet-box-input {
+  color: white;
+  background-color: transparent;
+  width: 95%;
+  height: 90%;
+  resize: none;
+  border: 0;
+}
+
+.tweet-box-input:focus {
+  outline: none;
+}
+.tweet-box-input::placeholder {
+  color: white;
+}
