@@ -18,9 +18,9 @@ class TweetBox extends React.Component {
 
     validateField(value) {
         if (value > 140) {
-            this.setState( {inputValid: false} )
+            this.setState({ inputValid: false })
         } else {
-            this.setState( { inputValid: true} )
+            this.setState({ inputValid: true })
         }
     }
 
@@ -30,13 +30,15 @@ class TweetBox extends React.Component {
 
     render() {
         return (
-            
+
             <div className="tweet-box">
                 <textarea className="tweet-box-input" value={this.state.input} onChange={(e) => { this.onInputChange(e) }} placeholder="What's on your mind..." >
                 </textarea>
-                <button type="button" disabled={!this.state.inputValid} className="btn" onClick={() => {this.btnOnClick()}}>Tweet</button>
+                <div className="text-end">
+                    <button type="button" disabled={!this.state.inputValid} className="btn" onClick={() => { this.btnOnClick() }}>Tweet</button>
+                </div>
             </div>
-            
+
         )
     }
 }
