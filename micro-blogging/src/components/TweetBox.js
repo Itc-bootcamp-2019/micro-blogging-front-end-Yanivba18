@@ -1,4 +1,5 @@
 import React from 'react';
+import { createTweet } from "./api"
 
 class TweetBox extends React.Component {
     constructor(props) {
@@ -25,7 +26,11 @@ class TweetBox extends React.Component {
     }
 
     btnOnClick() {
-        alert("Not implemented yet")
+        // alert("Not implemented yet")
+        // const { callback } = this.props;
+        // callback(this.state.input);
+        createTweet(this.state.input, "Too late");
+        this.setState({ input: '' });
     }
 
     render() {
@@ -34,8 +39,13 @@ class TweetBox extends React.Component {
             <div className="tweet-box">
                 <textarea className="tweet-box-input" value={this.state.input} onChange={(e) => { this.onInputChange(e) }} placeholder="What's on your mind..." >
                 </textarea>
-                <div className="text-end">
-                    <button type="button" disabled={!this.state.inputValid} className="btn" onClick={() => { this.btnOnClick() }}>Tweet</button>
+                <div className="d-flex">
+                    {!this.state.inputValid && <div className="invalid-input">
+                        The tweet can't contain more then 140 chars.
+                    </div>}
+                    <div className="btn-div">
+                        <button type="button" disabled={!this.state.inputValid} className="btn" onClick={() => { this.btnOnClick() }}>Tweet</button>
+                    </div>
                 </div>
             </div>
 
