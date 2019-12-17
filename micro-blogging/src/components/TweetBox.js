@@ -10,7 +10,7 @@ class TweetBox extends React.Component {
             loading: false,
         }
     }
-
+    
     onInputChange(e) {
         const value = e.target.value.length;
         console.log(value)
@@ -27,18 +27,37 @@ class TweetBox extends React.Component {
     }
 
     btnOnClick() {
-        // alert("Not implemented yet")
-        // const { callback } = this.props;
-        // callback(this.state.input);
         this.setState({ loading: true })
-        createTweet(this.state.input, "@TestingUser").then(() => {
+        const { callback } = this.props;
+
+        const date = new Date();
+        const today = date.toISOString();
+
+        let userName = localStorage.getItem("userName");
+
+        if (userName === null) {
+            userName = '@DefaultUser';
+        }
+
+        const payload = this.createJsonPayload(userName, this.state.input, today);
+        callback(payload);
+
+        createTweet(payload).then(() => {
             this.setState({ loading: false })
         })
-        .catch((response) => {
-            alert("Tweet not saved: " + response);
-            this.setState({ loading: false })
-        });
+            .catch((response) => {
+                alert("Tweet not saved: " + response);
+                this.setState({ loading: false })
+            });
         this.setState({ input: '' });
+    }
+
+    createJsonPayload(userName, content, date) {
+        return {
+            userName: userName,
+            content: content,
+            date: date
+        }
     }
 
     render() {
@@ -52,7 +71,7 @@ class TweetBox extends React.Component {
                         The tweet can't contain more then 140 chars.
                     </div>}
                     <div className="btn-div">
-                        <button type="button" disabled={!this.state.inputValid || this.state.loading} className="btn" onClick={() => { this.btnOnClick() }}>Tweet</button>
+                        <button type="button" disabled={!this.state.inputValid || this.state.loading} className="btn-blue" onClick={() => { this.btnOnClick() }}>Tweet</button>
                     </div>
                 </div>
             </div>
