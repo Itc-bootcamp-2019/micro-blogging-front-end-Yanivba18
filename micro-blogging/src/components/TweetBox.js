@@ -7,6 +7,7 @@ class TweetBox extends React.Component {
         this.state = {
             input: "",
             inputValid: true,
+            loading: false,
         }
     }
 
@@ -29,7 +30,14 @@ class TweetBox extends React.Component {
         // alert("Not implemented yet")
         // const { callback } = this.props;
         // callback(this.state.input);
-        createTweet(this.state.input, "Too late");
+        this.setState({ loading: true })
+        createTweet(this.state.input, "@TestingUser").then(() => {
+            this.setState({ loading: false })
+        })
+        .catch((response) => {
+            alert("Tweet not saved: " + response);
+            this.setState({ loading: false })
+        });
         this.setState({ input: '' });
     }
 
@@ -37,14 +45,14 @@ class TweetBox extends React.Component {
         return (
 
             <div className="tweet-box">
-                <textarea className="tweet-box-input" value={this.state.input} onChange={(e) => { this.onInputChange(e) }} placeholder="What's on your mind..." >
+                <textarea className="tweet-box-input" disabled={this.state.loading} value={this.state.input} onChange={(e) => { this.onInputChange(e) }} placeholder="What's on your mind..." >
                 </textarea>
                 <div className="d-flex">
                     {!this.state.inputValid && <div className="invalid-input">
                         The tweet can't contain more then 140 chars.
                     </div>}
                     <div className="btn-div">
-                        <button type="button" disabled={!this.state.inputValid} className="btn" onClick={() => { this.btnOnClick() }}>Tweet</button>
+                        <button type="button" disabled={!this.state.inputValid || this.state.loading} className="btn" onClick={() => { this.btnOnClick() }}>Tweet</button>
                     </div>
                 </div>
             </div>
