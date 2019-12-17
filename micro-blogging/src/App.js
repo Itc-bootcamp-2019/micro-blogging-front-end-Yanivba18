@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import TweetBox from './components/TweetBox';
 import MsgList from './components/MsgList';
+import NavBar from './components/Navbar';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,13 +13,17 @@ class App extends React.Component {
     }
   }
 
-  render(){
+  render() {
 
     return (
-      <div className="App">
-        <TweetBox />
-        <MsgList />
-      </div>
+      <>
+        <NavBar />
+        <div className="App">
+
+          <TweetBox />
+          <MsgList />
+        </div>
+      </>
     );
   }
 }
