@@ -13,7 +13,6 @@ class TweetBox extends React.Component {
     
     onInputChange(e) {
         const value = e.target.value.length;
-        console.log(value)
         this.setState({ input: e.target.value },
             () => { this.validateField(value) });
     }
