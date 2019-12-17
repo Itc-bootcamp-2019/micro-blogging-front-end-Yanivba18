@@ -12,8 +12,11 @@ class MsgList extends React.Component {
     }
 
     componentDidMount() {
+        setInterval(() => { this.updateTweets() }, 1000);
+    }
+
+    updateTweets() {
         getAllTweets().then((resolve) => {
-            console.log(resolve)
             this.setState({
                 messages: resolve.data.tweets,
                 loading: false
@@ -22,8 +25,8 @@ class MsgList extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log("component updated")
         if (prevProps.newTweet !== this.props.newTweet) {
+            console.log("component updated")
             this.setState(state => {
                 const messages = [this.props.newTweet].concat(state.messages)
                 return {
@@ -31,7 +34,7 @@ class MsgList extends React.Component {
                 }
             })
         }
-        
+
     }
 
     render() {
