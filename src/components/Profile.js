@@ -36,8 +36,10 @@ class Profile extends React.Component {
             <div className="Profile">
                 <span className="title">Profile</span>
                 <span className="sub-title">User Name</span>
-                <input type="text" onChange={(e) => { this.onInputChange(e) }} value={this.state.input} />
-                <button type="button" disabled={!this.state.inputValid} onClick={() => this.onClickSave()} className="btn-blue">Save</button>
+                <input type="text" className="user-input" onChange={(e) => { this.onInputChange(e) }} value={this.state.input} />
+                <span className="mr-3 text-right">
+                    <button type="button" disabled={!this.state.inputValid} onClick={() => this.onClickSave()} className="btn-blue">Save</button>
+                </span>
             </div>
         )
     }
