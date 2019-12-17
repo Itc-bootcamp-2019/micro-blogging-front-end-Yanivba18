@@ -19,7 +19,6 @@ class Profile extends React.Component {
     }
 
     onClickSave() {
-        // alert("Not implemented yet")
         console.log("State:" + this.state.input)
         localStorage.setItem("userName", this.state.input)
         this.setState({ input: '' })
