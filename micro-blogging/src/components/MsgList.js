@@ -21,15 +21,28 @@ class MsgList extends React.Component {
         })
     }
 
+    componentDidUpdate(prevProps) {
+        console.log("component updated")
+        if (prevProps.newTweet !== this.props.newTweet) {
+            this.setState(state => {
+                const messages = [this.props.newTweet].concat(state.messages)
+                return {
+                    messages,
+                }
+            })
+        }
+        
+    }
+
     render() {
         const { messages } = this.state;
         return (
             <div>
                 {this.state.loading && <span className="msg-box loading">Loading...</span>}
-                
+
                 {!this.state.loading && messages.map(msgObj => {
                     return (
-                        <Msg key={msgObj.date} user={msgObj.userName} date={msgObj.date} msg={msgObj.content}/>
+                        <Msg key={msgObj.date} user={msgObj.userName} date={msgObj.date} msg={msgObj.content} />
                     )
                 })}
             </div>
