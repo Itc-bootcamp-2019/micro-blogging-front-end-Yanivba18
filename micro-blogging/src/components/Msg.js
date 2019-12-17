@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Msg(props) {
-    const { user, date, msg, loading } = props;
+    const { user, date, msg } = props;
     
 
     return (
