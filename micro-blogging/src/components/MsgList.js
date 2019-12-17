@@ -12,7 +12,7 @@ class MsgList extends React.Component {
     }
 
     componentDidMount() {
-        setInterval(() => { this.updateTweets() }, 1000);
+        setInterval(() => { this.updateTweets() }, 2500);
     }
 
     updateTweets() {
