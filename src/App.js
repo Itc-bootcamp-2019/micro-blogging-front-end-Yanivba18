@@ -15,7 +15,7 @@ class App extends React.Component {
   }
 
   getTweetCallback = (tweet) => {
-    this.setState({ currTweet: tweet }, () => {console.log(this.state)})
+    this.setState({ currTweet: tweet })
   }
 
   render() {
