@@ -9,10 +9,15 @@ export function getAllTweets() {
 export function createTweet(content, userName) {
     const date = new Date();
     const today = date.toISOString();
-    return axios.post(`https://itc-bootcamp-19-dot-charcha-dev.appspot.com/tweet`, {
-        userName: userName,
+    const payload = {
         content: content,
-        date: today,
+        userName: userName,
+        date: today
+    }
+    return axios({
+        method: 'post',
+        url: `https://itc-bootcamp-19-dot-charcha-dev.appspot.com/tweet`, 
+        data: { tweet: payload }
     });
 }
 
