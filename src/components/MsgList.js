@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAllTweets } from "./api"
+import { getAllTweets } from "../lib/api"
 import Msg from './Msg';
 
 class MsgList extends React.Component {

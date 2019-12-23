@@ -1,5 +1,5 @@
 import React from 'react';
-import { createTweet } from "./api"
+import { createTweet } from "../lib/api"
 
 class TweetBox extends React.Component {
     constructor(props) {
