@@ -5,6 +5,7 @@ import TweetBox from './components/TweetBox';
 import MsgList from './components/MsgList';
 import NavBar from './components/Navbar';
 import Profile from './components/Profile';
+import firebase from "./lib/firestore";
 
 class App extends React.Component {
   constructor(props) {
@@ -16,6 +17,16 @@ class App extends React.Component {
 
   getTweetCallback = (tweet) => {
     this.setState({ currTweet: tweet })
+    this.writeTweetToFirestore(tweet);
+  }
+
+  writeTweetToFirestore(tweet) {
+    const db = firebase.firestore();
+    db.collection("tweets").doc(tweet.date).set(tweet)
+      .then((response) => {
+        console.log(response)
+      });
+
   }
 
   render() {
@@ -26,8 +37,8 @@ class App extends React.Component {
         <div className="App">
           <Switch>
             <Route exact path="/">
-              <TweetBox callback={this.getTweetCallback}/>
-              <MsgList newTweet={this.state.currTweet}/>
+              <TweetBox callback={this.getTweetCallback} />
+              <MsgList newTweet={this.state.currTweet} />
             </Route>
             <Route exact path="/profile/">
               <Profile />

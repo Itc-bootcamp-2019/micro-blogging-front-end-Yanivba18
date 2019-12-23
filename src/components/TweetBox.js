@@ -1,5 +1,4 @@
 import React from 'react';
-import { createTweet } from "../lib/api"
 
 class TweetBox extends React.Component {
     constructor(props) {
@@ -26,7 +25,7 @@ class TweetBox extends React.Component {
     }
 
     btnOnClick() {
-        this.setState({ loading: true })
+        this.setState({ loading: false }) //remember to change back to true once the check is correct
         const { callback } = this.props;
 
         const date = new Date();
@@ -41,21 +40,15 @@ class TweetBox extends React.Component {
         const payload = this.createJsonPayload(userName, this.state.input, today);
         callback(payload);
 
-        createTweet(payload).then(() => {
-            this.setState({ loading: false })
-        })
-            .catch((response) => {
-                alert("Tweet not saved: " + response);
-                this.setState({ loading: false })
-            });
+    
         this.setState({ input: '' });
     }
 
     createJsonPayload(userName, content, date) {
         return {
-            userName: userName,
             content: content,
-            date: date
+            date: date,
+            userName: userName,
         }
     }
 

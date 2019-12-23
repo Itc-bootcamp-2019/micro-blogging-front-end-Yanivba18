@@ -1,6 +1,7 @@
 import React from 'react';
-import { getAllTweets } from "../lib/api"
 import Msg from './Msg';
+import firebase from "../lib/firestore";
+
 
 class MsgList extends React.Component {
     constructor(props) {
@@ -11,23 +12,32 @@ class MsgList extends React.Component {
         }
     }
 
-    componentDidMount() {
-        setInterval(() => { this.updateTweets() }, 1000);
+    componentDidMount() {           
+        const db = firebase.firestore();
+
+        let doc = db.collection('tweets');
+
+        let observer = doc.onSnapshot(docSnapshot => {
+            console.log(`Received doc snapshot: `, docSnapshot.docs);
+            const tweetsList = [];
+            docSnapshot.docs.forEach((tweet) => {
+                console.log(tweet.data())
+                // Object.keys(tweet.doc._document.proto.fields)
+                tweetsList.unshift(tweet.data())
+            })
+            this.setState({ loading: false, messages: tweetsList })
+            // ...
+        }, err => {
+            console.log(`Encountered error: ${err}`);
+        });
     }
 
-    updateTweets() {
-        getAllTweets().then((resolve) => {
-            this.setState({
-                messages: resolve.data.tweets,
-                loading: false
-            })
-        })
-    }
 
     componentDidUpdate(prevProps) {
         if (prevProps.newTweet !== this.props.newTweet) {
             console.log("component updated")
             this.setState(state => {
+                console.log(state.messages)
                 const messages = [this.props.newTweet].concat(state.messages)
                 return {
                     messages,
