@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Switch, Route, BrowserRouter as Router, Link } from 'react-router-dom';
 import './App.css';
 import TweetBox from './components/TweetBox';
@@ -6,6 +7,8 @@ import MsgList from './components/MsgList';
 import NavBar from './components/Navbar';
 import Profile from './components/Profile';
 import firebase from "./lib/firestore";
+import FirebaseAuth from './components/FirebaseAuth';
+import { Modal, Button } from 'react-bootstrap';
 
 class App extends React.Component {
   constructor(props) {
@@ -45,6 +48,20 @@ class App extends React.Component {
             </Route>
           </Switch>
         </div>
+        <Modal show={true}>
+          <Modal.Header>
+            <Modal.Title>Sign in</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <FirebaseAuth />
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="secondary">Close</Button>
+            <Button variant="primary">Save changes</Button>
+          </Modal.Footer>
+        </Modal>
       </Router>
     );
   }
